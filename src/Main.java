@@ -97,7 +97,7 @@ class Frog{
         System.out.println("вызван конструктор Frog с 2 параметрами");
     }
 
-    public Frog(int x, int y, int len){
+    public Frog(int x, int y, int len) {
         place = new Point(x, y);
         tongueLength = len;
         System.out.println("вызван конструктор Frog с 3 параметрами");
