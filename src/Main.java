@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
        // test1();
-        createFrog();
-        createPoint();
-        ifGrassHopperIsAlive();
+      //  createFrog();
+       // createPoint();
+       ifGrassHopperIsAlive();
     }
 
     public static void test1 ()
@@ -34,16 +34,17 @@ public class Main {
         int x = scanner.nextInt();
         int y = scanner.nextInt();
         int len = scanner.nextInt();
-        Frog testFrog2 = new Frog(x, y, len);
-        return testFrog2;
+        //Frog testFrog2 = new Frog(x, y, len);
+        //return testFrog2;
+        return new Frog(x,y,len);
     }
     public static Point[] createPoint(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите длину маршрута: ");
         int n = scanner.nextInt();
         Point[] route = new Point[n];
+        System.out.println("Введите координаты точек: ");
             for (int i=0; i<n;i++) {
-                System.out.println("Введите координаты точек: ");
                 int x = scanner.nextInt();
                 int y = scanner.nextInt();
                 route[i] = new Point(x, y);
@@ -51,17 +52,24 @@ public class Main {
             return route;
     }
     public static void ifGrassHopperIsAlive(){
-        int n = createPoint().length;
-        Point[] route = new Point[n];
-        for (int i = 0; i < createPoint().length; i++) {
-            double d = Point.calcDistance(createFrog().place, route[i]);
-            System.out.println("Расстояние равно: "+d);
-            if( d<= createFrog().tongueLength )
-            {
-                System.out.println("кузнечек съеден в "+(i+1) +" точке");
-                break;
+        //int n = createPoint().length;
+        Frog frog = createFrog();
+        Point[] route = createPoint();
+        int number = analyze(frog,route);
+        if (number < 0)
+            System.out.println("кузнечек жив");
+        else System.out.println("кузнечек съеден в " + number +" точке");
+    }
+    public static int analyze(Frog frog, Point[] route) {
+        for (int i = 0; i < route.length; i++) {
+            double d = Point.calcDistance(frog.place, route[i]);
+            if (d <= frog.tongueLength) {
+                //System.out.println("кузнечек съеден в " +(i + 1) +" точке");
+               // break;
+                return i+1;
             }
         }
+        return -999;
     }
 }
 
